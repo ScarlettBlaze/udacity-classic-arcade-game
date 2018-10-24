@@ -4,11 +4,13 @@ var Enemy = function() {
     // we've provided one for you to get started
 
     // x position
+    this.x = 0;
     // y position
-
+    this.y = 0;
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
+    this.moveXAxis = 101;
 };
 
 // Update the enemy's position, required method for game
@@ -19,8 +21,11 @@ Enemy.prototype.update = function(dt) {
     // all computers.
 
     // If the enemy is not passed the boundary
+    if(this.x < this.moveXAxis * 4) {
         // Move forward
         // Increment x by speed * dt.
+        this.x += 20 * dt;
+    }
     // else
         // Reset current position back to start.
 };
@@ -41,8 +46,8 @@ class Player {
         // Properties
             this.moveXAxis = 101;
             this.moveYAxis = 83;
-            this.initX = this.moveXAxis*2;
-            this.initY = (this.moveYAxis*5)-20;
+            this.initX = this.moveXAxis * 2;
+            this.initY = (this.moveYAxis * 5) - 20;
             // x init position
             this.x = this.initX;
             // y init position
@@ -80,12 +85,12 @@ class Player {
                         }
                         break;
                     case 'right':
-                        if(this.x < this.moveXAxis *4) {
+                        if(this.x < this.moveXAxis * 4) {
                             this.x += this.moveXAxis;
                         }
                         break;
                     case 'down':
-                        if(this.y < this.moveYAxis*4) {
+                        if(this.y < this.moveYAxis * 4) {
                             this.y += this.moveYAxis;
                         }
                         break;
@@ -101,10 +106,12 @@ class Player {
 
 // New Player object
 const player = new Player();
-
+// New Enemy object
+const bug1 = new Enemy();
 // Initialize allEnemies array
+const allEnemies = [];
 // For each enemy, create and push new Enemy object into allEnemies array.
-
+allEnemies.push(bug1);
 
 
 // This listens for key presses and sends the keys to your
