@@ -39,14 +39,17 @@ class Player {
     // Constructor
     constructor() {
         // Properties
-
+            this.moveXAxis = 101;
+            this.moveYAxis = 83;
+            this.initX = this.moveXAxis*2;
+            this.initY = (this.moveYAxis*5)-20;
             // x init position
-            this.x = 0;
+            this.x = this.initX;
             // y init position
-            this.y = 0;
+            this.y = this.initY;
             // Player sprite image
-            this.sprite = 'images/char-cat-girl.png';
-
+            this.sprite = 'images/char-boy.png';
+    }
         // Methods
             // Update position
                 // Check collision state.
@@ -59,10 +62,37 @@ class Player {
                 ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
             }
             // Keyboard controls
-                // Update player(x,y) properties according to keyboard input.
+            /**
+            *  Update player(x,y) properties according to keyboard input.
+            * 
+            * @param {string} input - Direction to go.
+            */
+            handleInput(input) {
+                switch(input) {
+                    case 'left':
+                        if(this.x > 0) {
+                            this.x -= this.moveXAxis;
+                        }
+                        break;
+                    case 'up':
+                        if(this.y > this.moveYAxis) {
+                            this.y -= this.moveYAxis;
+                        }
+                        break;
+                    case 'right':
+                        if(this.x < this.moveXAxis *4) {
+                            this.x += this.moveXAxis;
+                        }
+                        break;
+                    case 'down':
+                        if(this.y < this.moveYAxis*4) {
+                            this.y += this.moveYAxis;
+                        }
+                        break;
+                }
+            }
             // Reset Player
                 // Set player(x,y) back to initial (x,y).
-    }
 }
 
 // Now instantiate your objects.
@@ -70,6 +100,7 @@ class Player {
 // Place the player object in a variable called player
 
 // New Player object
+const player = new Player();
 
 // Initialize allEnemies array
 // For each enemy, create and push new Enemy object into allEnemies array.
