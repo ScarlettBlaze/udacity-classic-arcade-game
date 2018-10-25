@@ -97,6 +97,26 @@ class Player {
                             this.y += this.moveYAxis;
                         }
                         break;
+                        case 'a':
+                        if(this.x > 0) {
+                            this.x -= this.moveXAxis;
+                        }
+                        break;
+                    case 'w':
+                        if(this.y > this.moveYAxis) {
+                            this.y -= this.moveYAxis;
+                        }
+                        break;
+                    case 'd':
+                        if(this.x < this.moveXAxis * 4) {
+                            this.x += this.moveXAxis;
+                        }
+                        break;
+                    case 's':
+                        if(this.y < this.moveYAxis * 4) {
+                            this.y += this.moveYAxis;
+                        }
+                        break;
                 }
             }
             // Reset Player
@@ -124,7 +144,11 @@ document.addEventListener('keyup', function(e) {
         37: 'left',
         38: 'up',
         39: 'right',
-        40: 'down'
+        40: 'down',
+        87: 'w',
+        65: 'a',
+        83: 's',
+        68: 'd',
     };
 
     player.handleInput(allowedKeys[e.keyCode]);
