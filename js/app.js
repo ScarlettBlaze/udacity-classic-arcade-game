@@ -11,7 +11,7 @@ var Enemy = function(x, y, speed) {
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
     this.speed = speed;
-    this.moveXAxis = 101;
+    this.moveXAxis = 101 + Math.floor(Math.random() * 222);
     this.boundary = this.moveXAxis * 5;
     this.resetPosition = -this.moveXAxis;
 };
@@ -150,13 +150,16 @@ class Player {
 // New Player object
 const player = new Player();
 // New Enemy object
-const bug1 = new Enemy(-101, 0, 200);
-const bug2 = new Enemy(-101, 83, 300);
-const bug3 = new Enemy((-101 * 2.5), 83, 300);
+const bug1 = new Enemy(-101, 0, 100 + Math.floor(Math.random() * 400));
+const bug2 = new Enemy(-101, 83, 125 + Math.floor(Math.random() * 400));
+const bug3 = new Enemy((-101 * 2.5), 166, 150 + Math.floor(Math.random() * 400));
+const bug4 = new Enemy(-101* 2.5, 0, 150 + Math.floor(Math.random() * 400));
+const bug5 = new Enemy(-101* 2.5, 83, 125 + Math.floor(Math.random() * 400));
+const bug6 = new Enemy((-101 * 2.5), 166, 100 + Math.floor(Math.random() * 400));
 // Initialize allEnemies array
 const allEnemies = [];
 // For each enemy, create and push new Enemy object into allEnemies array.
-allEnemies.push(bug1, bug2, bug3);
+allEnemies.push(bug1, bug2, bug3, bug4, bug5, bug6);
 
 
 // This listens for key presses and sends the keys to your
