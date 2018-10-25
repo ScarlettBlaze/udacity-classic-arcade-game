@@ -1,21 +1,32 @@
 body {
+    background-color: beige;
     text-align: center;
+    overflow-y: hidden;
 }
 
 .modal_background {
     position: absolute;
     top: 0;
     left: 0;
-    height: 100%;
+    height: 150%;
     width: 100%;
     background: rgba(0, 0, 0, 0.438);
 }
 
 .modal_body {
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    top: 50%;
+    position: relative;
+    width:  200px;
+    height: 200px;
+    top:  50%;
     left: 50%;
+    transform: translate(-50%, -150%);
     background: #ffffff;
 }
+
+h2 {
+    transform: translate(0%, 50%)
+}
+.hide {
+    display: none;
+}
+

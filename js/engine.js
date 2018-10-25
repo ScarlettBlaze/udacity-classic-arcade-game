@@ -25,6 +25,13 @@ var Engine = (function(global) {
         lastTime,
         id;
 
+    function toggleModal(){
+        const modal = document.querySelector('.modal_background');
+        modal.classList.toggle('hide');
+    }
+
+    const replay = document.querySelector('.modal_button');
+
     canvas.width = 505;
     canvas.height = 606;
     doc.body.appendChild(canvas);
@@ -56,8 +63,17 @@ var Engine = (function(global) {
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
          */
-        if (player.win === true){
-            win.cancelAnimationFrame(id);
+        replay.addEventListener('click', function(){
+            location.reload();
+            //toggleModal();
+            //player.resetPosition();
+            //player.win = false;
+            //win.requestAnimationFrame(main);
+        });
+
+        if (player.win === true) {
+            toggleModal();
+            win.cancelAnimationFrame(id);    
         } else {
             id = win.requestAnimationFrame(main);
         }
