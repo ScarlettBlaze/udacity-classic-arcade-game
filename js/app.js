@@ -1,18 +1,19 @@
 // Enemies our player must avoid
-var Enemy = function() {
+var Enemy = function(x, y, speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
     // x position
-    this.x = 0;
-    // y position
-    this.y = 0;
+    this.x = x;
+    // y position; centering Enemy object
+    this.y = y + 55;
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
+    this.speed = speed;
     this.moveXAxis = 101;
     this.boundary = this.moveXAxis * 5;
-    this.resetPosition = -this.step;
+    this.resetPosition = -this.moveXAxis;
 };
 
 // Update the enemy's position, required method for game
@@ -26,10 +27,10 @@ Enemy.prototype.update = function(dt) {
     if(this.x < this.boundary) {
         // Move forward
         // Increment x by speed * dt.
-        this.x += 200 * dt;
+        this.x += this.speed * dt;
     } else {
         // Reset current position back to start.
-        this.x = 0;
+        this.x = this.resetPosition;
     }       
 };
 
@@ -42,31 +43,46 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 
-// Player Class
+// Player class
 class Player {
-    // Constructor
+    // Player constructor
     constructor() {
         // Properties
-            this.moveXAxis = 101;
-            this.moveYAxis = 83;
-            this.initX = this.moveXAxis * 2;
-            this.initY = (this.moveYAxis * 5) - 20;
-            // x init position
-            this.x = this.initX;
-            // y init position
-            this.y = this.initY;
             // Player sprite image
             this.sprite = 'images/char-boy.png';
+            // Movement speed
+            this.moveXAxis = 101;
+            this.moveYAxis = 83;
+            // x init position
+            this.initX = this.moveXAxis * 2;
+            this.x = this.initX;
+            // y init position
+            this.initY = (this.moveYAxis * 4) + 55;
+            this.y = this.initY;
+            // Win state
+            this.win = false; 
+           
     }
         // Methods
             // Update position
+            update() {
                 // Check collision state.
+                for(let enemy of allEnemies) {
                     // Did the player(x,y) collide with enemy(x,y)?
+                    if(this.y === enemy.y && (enemy.x + enemy.moveXAxis > this.x && 
+                                              enemy.x < this.x + this.moveXAxis/2)) {
+                            this.resetPosition();
+                    }
+                }
                 // Check win state.
                     // Did the player(x,y) reach the final tile?
+                    if(this.y === 55) {
+                        this.win = true;
+                    }
+            }
             // Render
-                // Draw Player sprite on current (x,y) position.
             render() {
+                // Draw Player sprite on current (x,y) position.
                 ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
             }
             // Keyboard controls
@@ -120,7 +136,11 @@ class Player {
                 }
             }
             // Reset Player
+            resetPosition() {
                 // Set player(x,y) back to initial (x,y).
+                this.x = this.initX;
+                this.y = this.initY;
+            }
 }
 
 // Now instantiate your objects.
@@ -130,11 +150,13 @@ class Player {
 // New Player object
 const player = new Player();
 // New Enemy object
-const bug1 = new Enemy();
+const bug1 = new Enemy(-101, 0, 200);
+const bug2 = new Enemy(-101, 83, 300);
+const bug3 = new Enemy((-101 * 2.5), 83, 300);
 // Initialize allEnemies array
 const allEnemies = [];
 // For each enemy, create and push new Enemy object into allEnemies array.
-allEnemies.push(bug1);
+allEnemies.push(bug1, bug2, bug3);
 
 
 // This listens for key presses and sends the keys to your
