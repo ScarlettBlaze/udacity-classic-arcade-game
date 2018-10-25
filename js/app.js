@@ -11,6 +11,8 @@ var Enemy = function() {
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
     this.moveXAxis = 101;
+    this.boundary = this.moveXAxis * 5;
+    this.resetPosition = -this.step;
 };
 
 // Update the enemy's position, required method for game
@@ -21,13 +23,14 @@ Enemy.prototype.update = function(dt) {
     // all computers.
 
     // If the enemy is not passed the boundary
-    if(this.x < this.moveXAxis * 4) {
+    if(this.x < this.boundary) {
         // Move forward
         // Increment x by speed * dt.
-        this.x += 20 * dt;
-    }
-    // else
+        this.x += 200 * dt;
+    } else {
         // Reset current position back to start.
+        this.x = 0;
+    }       
 };
 
 // Draw the enemy on the screen, required method for game
