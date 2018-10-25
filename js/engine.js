@@ -30,7 +30,7 @@ var Engine = (function(global) {
         modal.classList.toggle('hide');
     }
 
-    const replay = document.querySelector('.modal_button');
+    const replay = document.querySelector('.modal_replayBtn');
 
     canvas.width = 505;
     canvas.height = 606;
