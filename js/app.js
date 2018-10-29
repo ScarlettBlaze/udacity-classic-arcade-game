@@ -1,4 +1,5 @@
 // Enemies our player must avoid
+'use strict'
 var Enemy = function(x, y, speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
@@ -69,7 +70,7 @@ class Player {
                 // Check collision state.
                 for(let enemy of allEnemies) {
                     // Did the player(x,y) collide with enemy(x,y)?
-                    if(this.y === enemy.y && (enemy.x + enemy.moveXAxis > this.x && 
+                    if(this.y === enemy.y && (enemy.x + enemy.moveXAxis/3.5 > this.x && 
                                               enemy.x < this.x + this.moveXAxis/2)) {
                             this.resetPosition();
                     }
